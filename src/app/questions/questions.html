@@ -1,0 +1,200 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 text-center text-bg-dark p-2">
+      Admin Panel - Quiz App Admin
+    </div>
+  </div>
+  <div class="row">
+    <!-- slider design -->
+    <div class="col-sm-2 mt-3">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a routerLink="/dashboard" class="nav-link active">Dashboard</a>
+        </li>
+        <br />
+        <li class="nav-item">
+          <a routerLink="/quiz" class="nav-link active">Quiz</a>
+        </li>
+        <br />
+        <li class="nav-item">
+          <a routerLink="/attempts" class="nav-link active">Attempts</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Text -->
+    <div class="col-sm-10">
+      <h1>Questions Management</h1>
+      <small>
+        (for Quiz ID: <kbd>{{ quizid }}</kbd>)
+      </small>
+      <br /><br />
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        (click)="isEditMode = false; editId = null; resetForm()"
+      >
+        Add Question
+      </button>
+      <br /><br />
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                {{ isEditMode ? 'Edit Question' : 'Add New Question' }}
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="saveQuestion()">
+                <input type="hidden" name="quizid" [(ngModel)]="quizid" />
+
+                Enter Question Name
+                <input
+                  type="text"
+                  class="form-control"
+                  name="question"
+                  [(ngModel)]="question"
+                />
+                <br />
+
+                Enter Option (A)
+                <input
+                  type="text"
+                  class="form-control"
+                  name="ans1"
+                  [(ngModel)]="ans1"
+                />
+                <br />
+
+                Enter Option (B)
+                <input
+                  type="text"
+                  class="form-control"
+                  name="ans2"
+                  [(ngModel)]="ans2"
+                />
+                <br />
+
+                Enter Option (C)
+                <input
+                  type="text"
+                  class="form-control"
+                  name="ans3"
+                  [(ngModel)]="ans3"
+                />
+                <br />
+
+                Enter Option (D)
+                <input
+                  type="text"
+                  class="form-control"
+                  name="ans4"
+                  [(ngModel)]="ans4"
+                />
+                <br />
+
+                Enter Correct Answer
+                <select
+                  name="correctans"
+                  class="form-control"
+                  [(ngModel)]="correctans"
+                >
+                  <option value="">-Select Correct Answer</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+
+                <br /><br />
+                <button class="btn btn-primary" type="submit">
+                  {{ isEditMode ? 'Update' : 'Save' }}
+                </button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Questions Table -->
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Sr.no</th>
+                <th>Question</th>
+                <th>Option A</th>
+                <th>Option B</th>
+                <th>Option C</th>
+                <th>Option D</th>
+                <th>Correct Answer</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of allquiz; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.question }}</td>
+                <td>{{ item.ans1 }}</td>
+                <td>{{ item.ans2 }}</td>
+                <td>{{ item.ans3 }}</td>
+                <td>{{ item.ans4 }}</td>
+                <td>{{ item.correctans }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="deleteQuestion(item.id)"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    (click)="editQuestion(item)"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+
+              <tr *ngIf="allquiz.length === 0">
+                <td colspan="8" class="text-center">
+                  No questions found.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

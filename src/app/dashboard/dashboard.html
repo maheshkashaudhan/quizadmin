@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 text-center text-bg-dark">
+      Admin Panel - Quiz App Admin
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- ===== Sidebar (UNCHANGED) ===== -->
+    <div class="col-sm-2 mt-3">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a routerLink="/dashboard" class="nav-link active">Dashboard</a>
+        </li>
+        <br/>
+        <li class="nav-item">
+          <a routerLink="/quiz" class="nav-link active">Quiz</a>
+        </li>
+        <br/>
+        <li class="nav-item">
+          <a routerLink="/attempts" class="nav-link active">Attempts</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ===== Main Content ===== -->
+    <div class="col-sm-10">
+      <h1>Quiz Dashboard</h1>
+
+      <div class="row">
+
+        <div class="col-sm-3">
+          <div class="card text-bg-primary my-3">
+            <div class="card-header">Total Quiz</div>
+            <div class="card-body">
+              <h5 class="card-title">
+                Total Quiz : {{ stats.totalQuiz }}
+              </h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card text-bg-success my-3">
+            <div class="card-header">Active Quiz</div>
+            <div class="card-body">
+              <h5 class="card-title">
+                Active Quiz : {{ stats.activeQuiz }}
+              </h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card text-bg-warning my-3">
+            <div class="card-header">Total Attempts</div>
+            <div class="card-body">
+              <h5 class="card-title">
+                Attempts : {{ stats.totalAttempts }}
+              </h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card text-bg-danger my-3">
+            <div class="card-header">Total Students</div>
+            <div class="card-body">
+              <h5 class="card-title">
+                Students : {{ stats.totalStudents }}
+              </h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
